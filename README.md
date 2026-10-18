@@ -1,147 +1,93 @@
-# Gerador de Currículos ATS v2
-# ATS-Friendly Resume Builder v2
+# gerador-curriculos-ats-v2
 
-Gerador de currículos otimizado para sistemas de rastreamento de candidatos (ATS), construído com React 18, TypeScript e Tailwind CSS. Oferece múltiplos templates, importação manual de perfil do LinkedIn e exportação de PDF de texto (selecionável e legível por ATS).
+![JavaScript/TypeScript](https://img.shields.io/badge/JS-TS-yellow?logo=javascript)   ![status: concluido](https://img.shields.io/badge/status-concluido-green)   ![licenca: MIT](https://img.shields.io/badge/licenca-MIT-blue)
 
-ATS-friendly resume builder with multiple templates, manual LinkedIn profile import, and text-based PDF export (selectable and ATS-readable). Built with React 18, TypeScript, and Tailwind CSS.
+## Resumo
 
----
+Aplicacao web em JavaScript/TypeScript. Projeto funcional, gerador-curriculos-ats-v2
 
-## Descrição / Description
+## Problema / por que existe
 
-**PT-BR:** A maioria dos sistemas ATS rejeita currículos com colunas, imagens, gráficos ou texto embutido em imagem. Este projeto gera currículos em HTML semântico, coluna única, sem imagens — o que o navegador imprime como PDF de texto puro. O resultado é selecionável, acessível a leitores de tela e legível por recrutadores e máquinas.
+O projeto entrega uma interface ou utilitario web para um recorte especifico, com foco em navegador como ambiente de execucao e sem dependencia de servidor proprio.
 
-**EN:** Most ATS systems reject resumes with columns, images, charts, or text embedded in images. This project generates semantic, single-column HTML with no images — printed by the browser as plain-text PDF. The output is selectable, screen-reader accessible, and readable by recruiters and machines alike.
+## Arquitetura
 
----
+- Camada de apresentacao: componentes e paginas que renderizam a interface.
+- Camada de logica: funcoes e hooks que processam dados e estado.
+- Comunicacao: requisicoes HTTP a APIs externas ou dados locais, quando aplicavel.
 
-## Como usar / How to use
+O build e feito com Vite (ou ferramenta equivalente), gerando arquivos estaticos prontos para hospedagem.
 
-### Pré-requisitos / Prerequisites
+## Tecnologias
 
-Node.js 20+ e npm.
+- JavaScript / TypeScript
+- react
+- react-dom
+- @types/react
+- @types/react-dom
+- @vitejs/plugin-react
+- autoprefixer
+- jsdom
+- postcss
+- tailwindcss
+- typescript
+- vite
+- vitest
 
-Node.js 20+ and npm.
+- Sem CI configurado neste repositorio.
 
-### Instalação / Installation
+O repositorio contem testes automatizados.
 
-```bash
-cd gerador-curriculos-ats-v2
+## O que faz
+
+Projeto funcional, gerador-curriculos-ats-v2
+
+## Como rodar
+
+Requisitos: Node.js e npm (ou yarn/pnpm).
+
+```
+# instalar dependencias
 npm install
+
+# rodar em desenvolvimento
+vite
+
+# build para producao
+tsc --noEmit && vite build
+
+# rodar testes
+vitest run
 ```
 
-### Desenvolvimento / Development
+## Estrutura do projeto
 
-```bash
-npm run dev
+- src/ (21 arquivo(s))
+- .gitignore, BRIEF.md, index.html, package-lock.json, package.json, postcss.config.js, README.en.md, README.md, tailwind.config.js, tsconfig.json e mais 1
+
+
+## Trade-offs e decisões
+
+- Build estatico: facil de hospedar (GitHub Pages, Vercel, Netlify) sem servidor.
+- Dependencias minimas para reduzir superficie de manutencao.
+- Navegador como unico ambiente de execucao necessario.
+
+## Limitações conhecidas
+
+- Funciona no navegador; depende de conexao a internet para recursos externos.
+
+
+## Testes
+
+```
+vitest run
 ```
 
-Abre http://localhost:5173.
+## Licença
 
-Opens http://localhost:5173.
+Distribuído sob a licenca MIT. Consulte o arquivo `LICENSE` do repositorio.
 
-### Build de produção / Production build
+## Autor
 
-```bash
-npm run build
-```
-
-Gera a pasta `dist/`.
-
-Outputs the `dist/` folder.
-
-### Preview de produção / Production preview
-
-```bash
-npm run preview
-```
-
----
-
-## Stack
-
-- React 18
-- TypeScript (modo strict)
-- Tailwind CSS
-- Vite
-- Vitest (testes)
-
----
-
-## Templates
-
-Três templates, todos ATS-friendly (coluna única, sem imagens, texto puro):
-
-**classic** — Cabeçalho centralizado, linhas de separação, seções claras.
-
-**modern** — Cabeçalho com linha de destaque, datas alinhadas à direita, tags de habilidade coloridas.
-
-**minimal** — Versão enxuta, espaçamento reduzido, sem cor de destaque. Máxima compatibilidade com ATS.
-
-Three templates, all ATS-friendly (single column, no images, plain text):
-
-**classic** — Centered header, divider lines, clear sections.
-
-**modern** — Highlighted header line, right-aligned dates, colored skill tags.
-
-**minimal** — Compact, reduced spacing, no accent color. Maximum ATS compatibility.
-
----
-
-## Exportação de PDF / PDF export
-
-Clique em **Exportar PDF** no cabeçalho. O aplicativo renderiza o currículo num container oculto e chama `window.print()`, que o navegador transforma em PDF via "Imprimir como PDF".
-
-Vantagem dessa abordagem: o PDF contém texto de verdade (não imagem), então é selecionável, acessível e legível por ATS.
-
-Click **Export PDF** in the header. The app renders the resume in a hidden container and calls `window.print()`, which the browser turns into a PDF via "Print to PDF".
-
-Advantage: the PDF contains real text (not an image), so it is selectable, accessible, and ATS-readable.
-
----
-
-## Importação do LinkedIn / LinkedIn import
-
-O LinkedIn exige autenticação e não oferece API pública de exportação sem chave. Por isso, a importação é manual: cole a URL do perfil no botão **Importar LinkedIn** e preencha os dados no editor. Tudo é processado localmente, sem requisições de rede.
-
-LinkedIn requires authentication and offers no public export API without a key. Import is therefore manual: paste the profile URL in **Import LinkedIn** and fill in the data in the editor. Everything is processed locally, with no network requests.
-
----
-
-## Testes / Tests
-
-```bash
-npm test
-```
-
-Executa o conjunto Vitest (39 testes em 3 arquivos): validação de dados, utilitários de currículo e geração de HTML para impressão.
-
-Runs the Vitest suite (39 tests in 3 files): data validation, resume utilities, and print HTML generation.
-
-Todos os testes passam e o comando de build (`tsc --noEmit && vite build`) é executado sem erros.
-
-All tests pass and the build command (`tsc --noEmit && vite build`) runs without errors.
-
----
-
-## Licença / License
-
-MIT License.
-
-Copyright (c) 2026 Kelvin Oliveira.
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-
----
-
-## Autor / Author
-
-**Kelvin Oliveira**
-
-Projeto desenvolvido para a área Frontend do plano de 50 projetos.
-
-Project developed for the Frontend area of the 50-projects plan.
+Kelvin Oliveira, https://github.com/KelvinOliveiraCode
+Portfolio: https://kelvinoliveiracode.github.io/portfolio/
