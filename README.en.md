@@ -1,127 +1,114 @@
 # gerador-curriculos-ats-v2
 
-<div align="center">
-
 **English** · [Português (Brasil)](README.md)
 
-</div>
-
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?style=flat-square&logo=typescript&logoColor=white)](https://www.typescriptlang.org/) [![React 18](https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react&logoColor=black)](https://react.dev/) [![Vite](https://img.shields.io/badge/Vite-5-646CFF?style=flat-square&logo=vite&logoColor=white)](https://vitejs.dev/) [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-06B6D4?style=flat-square&logo=tailwindcss)](https://tailwindcss.com/) [![MIT License](https://img.shields.io/badge/License-MIT-f4c430?style=flat-square)](LICENSE)
-
-### Projeto funcional ,  gerador-curriculos-ats-v2
-
----
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?style=flat-square&logo=typescript&logoColor=white)](#) [![React 18](https://img.shields.io/badge/React-18-61DAFB?style=flat-square&logo=react&logoColor=black)](#) [![Vite](https://img.shields.io/badge/Vite-5-646CFF?style=flat-square&logo=vite&logoColor=white)](#) [![Tailwind](https://img.shields.io/badge/Tailwind-3-06B6D4?style=flat-square&logo=tailwindcss)](#) [![Vitest](https://img.shields.io/badge/Vitest-39%20tests-6BA81E?style=flat-square&logo=vitest)](#) [![MIT License](https://img.shields.io/badge/License-MIT-f4c430?style=flat-square)](LICENSE)
 
 ## What it is
 
-Projeto funcional ,  gerador-curriculos-ats-v2
+An **ATS-friendly résumé builder** (version 2): the user assembles a résumé section by section, can **import data from a LinkedIn profile**, edit each block (education, experience, skills, languages, certifications) and **export to PDF**. It is a React 18 + TypeScript + Tailwind app, with validation and PDF-generation logic separated and tested (Vitest).
 
----
+## Status
 
-## Quick Start
+Under development, working and tested (39 tests). Build validated.
 
-```bash
-# Clone and enter
-git clone https://github.com/KelvinOliveiraCode/<repo>.git
-cd <repo>
+## Features
 
-# Install dependencies
-npm install
+- **LinkedIn profile import** (`LinkedInImport`): fills the draft from imported data.
+- **PDF export** (`PdfExport`): generates the résumé PDF from the preview.
+- **Section editor** (`ResumeEditor`, `SectionEditor`): personal data, education, experience, skills, languages, certifications.
+- **Live preview** (`ResumePreview`) in an ATS-friendly layout.
+- **Persistence** in `localStorage` (the `useResume` hook).
+- **Separate testable logic**: `resume-utils` (model assembly), `validation` and `pdf` (generation).
+- **Build/scripts**: `dev`, `build` (tsc --noEmit && vite build), `test` (vitest run), `preview`.
 
-# Development server
-npm run dev
+## Architecture
 
-# Production build
-npm run build
+React UI components (`src/components`) + hooks (`useResume`) + `src/lib` (pdf, resume-utils, validation) holding the testable business logic. `App.tsx` orchestrates the flow (LinkedIn import → edit → preview → export).
 
-# Run tests
-npm test
+```mermaid
+flowchart LR
+    L[LinkedInImport] --> APP[App.tsx]
+    APP --> EDIT[ResumeEditor / SectionEditor]
+    APP --> PREV[ResumePreview]
+    PREV --> PDF[PdfExport - PDF]
+    APP --> LS[useResume - localStorage]
+    LIB[lib: pdf · resume-utils · validation] --> APP
 ```
 
-## How it works
+## Stack
 
-Arquitetura de componente em arquivo único (`App.tsx`): toda a UI, estado e lógica vivem em um arquivo para simplicidade de deploy e build zero-config.
+- React 18.3, TypeScript ~5.6
+- Vite 5, Tailwind CSS 3.4
+- Vitest 2 + jsdom (tests)
+- npm 11
 
-Decisões arquiteturais principais:
-- **Estado global** via `useState` + `useMemo` (evita overhead do Context API)
-- **Agregações memoizadas** para gráficos e insights
-- **Dados mock in-line** como constantes TypeScript para prototipagem sem backend
-- **IA baseada em regras** (`getAIResponse`) ,  determinística, offline, custo zero
+## Repository layout
 
----
+```
+gerador-curriculos-ats-v2/
+├── src/
+│   ├── App.tsx · main.tsx
+│   ├── components/     # LinkedInImport, PdfExport, ResumeEditor,
+│   │                   # ResumePreview, SectionEditor, FormField, Icons
+│   ├── hooks/useResume.ts   # state + localStorage
+│   ├── lib/            # pdf.ts, resume-utils.ts, validation.ts (+ tests)
+│   └── index.css
+├── index.html · package.json · vite.config.ts
+├── tailwind.config.js · postcss.config.js
+└── LICENSE             # MIT
+```
 
-## Capabilities
+## Prerequisites and installation
 
-| Capacidade | Descrição |
-|------------|-------------|
-| Dashboard | 6 cards de métricas (Saldo, Receitas, Despesas, Economia, Investimentos, Patrimônio) |
-| Fluxo de Caixa | Gráfico de barras (7d/30d) com Recharts ,  Receitas, Despesas, Saldo por período |
-| Orçamentos | Orçamentos por categoria com barras de progresso, alertas de estouro |
-| Metas | Anéis de progresso com cálculo de economia mensal e contagem regressiva |
-| Assistente IA | Chat baseado em regras (getAIResponse) ,  análise de gastos, dicas, projeções |
-| Insights | Alertas automáticos: picos de delivery, crescimento patrimonial, breakdown por categoria |
-| Transações | Adicionar/editar receitas/despesas com categorias, tags, seletor de data |
-| Persistência | localStorage ,  estado sobrevive a reload, zero backend |
+Node.js (npm).
 
+```bash
+git clone https://github.com/KelvinOliveiraCode/gerador-curriculos-ats-v2.git
+cd gerador-curriculos-ats-v2
+npm install
+```
 
----
+## How to run
 
+```bash
+npm run dev         # development server
+npm test            # vitest run
+npm run build       # production build (tsc --noEmit && vite build)
+npm run preview     # preview the build
+```
 
+## Tests and quality
 
----
+Real run (verified by the agent):
 
-## FAQ
+```bash
+npm test
+# 39 passed (3 files): validation 12, resume-utils 15, pdf 12
+npm run build
+# built in 3.18s
+```
 
-<details>
-<summary><strong>What is this project?</strong></summary>
+There is no CI configured in this repository.
 
-A React/TypeScript study/project demonstrating core concepts.
+## Technical decisions and trade-offs
 
-</details>
+- **Logic separated from the UI in `src/lib`**: validation, model assembly and PDF generation are testable without the DOM.
+- **localStorage via `useResume`**: simple in-browser persistence, no backend.
+- **LinkedIn import as a shortcut**: reduces the effort of filling a résumé from an existing profile.
 
-<details>
-<summary><strong>How do I run it?</strong></summary>
+## Known limitations and roadmap
 
-See [Quick Start](#quick-start) for copy-paste commands.
+- The LinkedIn import depends on the format of the input data.
+- No verified live deployment (the URL in the repository returns 404 in this pass).
+- No CI configured.
 
-</details>
+## Development process
 
-<details>
-<summary><strong>Are there tests?</strong></summary>
+An individual project by Kelvin Oliveira, built with orchestrated AI agents and reviewed by the author. The component architecture, the PDF logic and the review are the author's.
 
-No automated tests in this repository.
+## License and author
 
-</details>
+MIT — Copyright (c) 2026 Kelvin Rebelo de Oliveira.
 
-<details>
-<summary><strong>Can I use this in production?</strong></summary>
-
-This is a **study/portfolio project**. Review and harden (auth, persistence, monitoring, etc.) before production use.
-
-</details>
-
-
-
----
-
-## Documentation
-
-- **Source Code** ,  Browse the `src/` directory for implementation details
-- **API Reference** ,  TypeScript types in source
-- **Architecture Diagram** ,  See [architecture.mermaid](docs/architecture.mermaid) (if present)
-- **Changelog** ,  [CHANGELOG.md](CHANGELOG.md) (if present)
-- **Contributing** ,  [CONTRIBUTING.md](CONTRIBUTING.md) (if present)
-
-## License
-
-[MIT](LICENSE) ,  Kelvin Oliveira
-
----
-
-<div align="center">
-
-**Built with** · TypeScript + React + Vite + Tailwind
-
-**Author** · [Kelvin Oliveira](https://github.com/KelvinOliveiraCode) · [Portfolio](https://kelvinoliveiracode.github.io/portfolio/)
-
-</div>
+**Author**: [Kelvin Oliveira](https://github.com/KelvinOliveiraCode) · [Portfolio](https://kelvinoliveiracode.github.io/portfolio/)
