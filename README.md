@@ -19,8 +19,8 @@ Em desenvolvimento, funcional e testado (39 testes). Build validado.
 - **Editor de seções** (`ResumeEditor`, `SectionEditor`): dados pessoais, formação, experiência, habilidades, idiomas, certificações.
 - **Preview** (`ResumePreview`) em tempo real, em layout ATS-friendly.
 - **Persistência** em `localStorage` (hook `useResume`).
-- **Lógica testável separada**: `resume-utils` (montagem do modelo), `validation` (validação) e `pdf` (geração).
-- **Build/scripts**: `dev`, `build` (tsc --noEmit && vite build), `test` (vitest run), `preview`.
+- Lógica testável separada: `resume-utils` (montagem do modelo), `validation` (validação) e `pdf` (geração).
+- Build/scripts: `dev`, `build` (tsc --noEmit && vite build), `test` (vitest run), `preview`.
 
 ## Arquitetura
 
@@ -45,7 +45,7 @@ flowchart LR
 
 ## Estrutura do repositório
 
-```
+```text
 gerador-curriculos-ats-v2/
 ├── src/
 │   ├── App.tsx · main.tsx
@@ -93,9 +93,9 @@ Não há CI configurado neste repositório.
 
 ## Decisões técnicas e trade-offs
 
-- **Lógica separada da UI em `src/lib`**: validação, montagem do modelo e geração de PDF são testáveis sem o DOM.
-- **localStorage via `useResume`**: persistência simples no navegador, sem backend.
-- **Importação LinkedIn como atalho**: reduz o esforço de preencher o currículo a partir de um perfil existente.
+- Lógica separada da UI em `src/lib`: validação, montagem do modelo e geração de PDF são testáveis sem o DOM.
+- localStorage via `useResume`: persistência simples no navegador, sem backend.
+- Importação LinkedIn como atalho: reduz o esforço de preencher o currículo a partir de um perfil existente.
 
 ## Limitações conhecidas e roadmap
 
@@ -109,6 +109,6 @@ Projeto individual de Kelvin Oliveira, construído com agentes de IA orquestrado
 
 ## Licença e autor
 
-MIT — Copyright (c) 2026 Kelvin Rebelo de Oliveira.
+MIT. Copyright (c) 2026 Kelvin Rebelo de Oliveira.
 
 **Autor**: [Kelvin Oliveira](https://github.com/KelvinOliveiraCode) · [Portfólio](https://kelvinoliveiracode.github.io/portfolio/)

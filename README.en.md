@@ -19,8 +19,8 @@ Under development, working and tested (39 tests). Build validated.
 - **Section editor** (`ResumeEditor`, `SectionEditor`): personal data, education, experience, skills, languages, certifications.
 - **Live preview** (`ResumePreview`) in an ATS-friendly layout.
 - **Persistence** in `localStorage` (the `useResume` hook).
-- **Separate testable logic**: `resume-utils` (model assembly), `validation` and `pdf` (generation).
-- **Build/scripts**: `dev`, `build` (tsc --noEmit && vite build), `test` (vitest run), `preview`.
+- Separate testable logic: `resume-utils` (model assembly), `validation` and `pdf` (generation).
+- Build/scripts: `dev`, `build` (tsc --noEmit && vite build), `test` (vitest run), `preview`.
 
 ## Architecture
 
@@ -45,7 +45,7 @@ flowchart LR
 
 ## Repository layout
 
-```
+```text
 gerador-curriculos-ats-v2/
 ├── src/
 │   ├── App.tsx · main.tsx
@@ -93,9 +93,9 @@ There is no CI configured in this repository.
 
 ## Technical decisions and trade-offs
 
-- **Logic separated from the UI in `src/lib`**: validation, model assembly and PDF generation are testable without the DOM.
-- **localStorage via `useResume`**: simple in-browser persistence, no backend.
-- **LinkedIn import as a shortcut**: reduces the effort of filling a résumé from an existing profile.
+- Logic separated from the UI in `src/lib`: validation, model assembly and PDF generation are testable without the DOM.
+- localStorage via `useResume`: simple in-browser persistence, no backend.
+- LinkedIn import as a shortcut: reduces the effort of filling a résumé from an existing profile.
 
 ## Known limitations and roadmap
 
@@ -109,6 +109,6 @@ An individual project by Kelvin Oliveira, built with orchestrated AI agents and 
 
 ## License and author
 
-MIT — Copyright (c) 2026 Kelvin Rebelo de Oliveira.
+MIT. Copyright (c) 2026 Kelvin Rebelo de Oliveira.
 
 **Author**: [Kelvin Oliveira](https://github.com/KelvinOliveiraCode) · [Portfolio](https://kelvinoliveiracode.github.io/portfolio/)
